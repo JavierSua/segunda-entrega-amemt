@@ -63,6 +63,17 @@
     font-size: 20px;
 }
 
+.btnTablaAgregar{
+    display: flex;
+    color: black;
+    text-align: center;
+    background-color:#5db85d;
+    border: solid 2px #5db85d;
+    border-radius: 3px;
+    margin-left: 10%;
+    margin-top: 8px;
+}
+
 footer{
     display: block;
     margin-top: 25px;

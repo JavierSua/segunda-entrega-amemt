@@ -34,7 +34,13 @@ let createBody = (elements)=> {
     tableEl.appendChild(tbodyEl);
 };
 
+let btnAgregar = document.getElementById('btnTablaModalAgregar');
+
 window.addEventListener('load', () => {
     createHeader(clavesEspecimenes);
     createBody(dataParseada.especimenes);
+});
+
+btnAgregar.addEventListener('click', () => {
+    console.log("oli")
 });
