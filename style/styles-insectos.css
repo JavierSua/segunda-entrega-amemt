@@ -1,0 +1,129 @@
+.navbar-brand{
+    font-size: 1.5rem;
+}
+
+.navbar{
+    padding: 0 1rem;
+    border-bottom: #4f4f4f solid 2px;
+}
+
+.fa-stack{
+    font-size: 1.8rem;
+    color: #4f4f4f;
+}
+.carousel-item{
+    height: 400px;
+} 
+.carousel-caption{
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 20 0;
+    background: url(../style/img/bg-filter.png);
+}
+
+.container{
+    background-color: #9e9e9e80;
+    padding: 15px;
+    margin-top: 12px;
+    margin-bottom: 12px;
+}
+
+.card{
+    background-color:  #a3a3a3;
+    border: solid 2px rgb(99, 99, 99);
+}
+
+
+.btn, .btn-wrn {
+    display: flex;
+    color: black;
+    padding: 0 0;
+    text-align: center;
+    transition: 0.4s;
+}
+
+.btn:hover {
+    background-color:#696969;
+    color: white;
+    border: solid 5px #696969;
+}
+
+.btn-wrn:hover{
+    background-color: #b8bb1c;
+    font-size: 20px;
+}
+
+
+footer{
+    display: block;
+    margin-top: 25px;
+    padding: 20px 0;
+    background: rgb(17, 17, 17);
+}
+
+a{
+    color:#9e9e9e80;
+}
+a:hover{
+    color:#9e9e9e;
+}
+
+.container-footer{ 
+    font-size: 15px;
+    background-color: rgb(17, 17, 17);
+}
+
+.container-social{
+    font-size: 17px;
+}
+
+.bg-text{
+    background-color: #bdbdbd!important;
+    overflow: auto;
+}
+.bg-text .col-12{
+    font-size: 1.1rem;
+}
+
+.background-filter{
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    z-index: -100000;
+    position: fixed;
+    background: url(../style/img/bg-filter.png);
+}
+
+.background-img-container {
+    left: 0px;
+    top: 0px;
+    overflow: hidden;
+    margin: 0px;
+    padding: 0px;
+    height: 100%;
+    width: 100%;
+    z-index: -999999;
+    position: fixed;
+}
+
+.background-img{
+    background-image: url("../style/img/bg-img-insect.jpg");
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat; 
+    background-size: cover;
+}
+body{
+    background-color: #5a6773; /*Por si falla cargar la imagen de fondo*/
+}
+
+.undr-cstr{
+    max-height: 452px;
+    max-width: 452px;
+    margin: auto;
+}

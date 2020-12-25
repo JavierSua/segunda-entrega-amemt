@@ -1,0 +1,132 @@
+.navbar-brand{
+    font-size: 1.5rem;
+}
+
+.navbar{
+    padding: 0 1rem;
+    border-bottom: #6b5833 solid 2px;
+}
+
+.fa-stack{
+    font-size: 1.8rem;
+    color: #6b5833;
+}
+.carousel-item img{
+    width: auto;
+    max-height: 245px;
+    margin: auto; 
+    display: block;
+} 
+.carousel-caption{
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 20 0;
+    background: url(../style/img/bg-filter.png);
+}
+
+.container{
+    background-color: #d5b16780;
+    padding: 15px;
+    margin-top: 12px;
+    margin-bottom: 12px;
+}
+
+.card{
+    background-color:  #b0ac96;
+    border: solid 2px rgb(99, 99, 99);
+}
+
+
+.btn, .btn-wrn {
+    display: flex;
+    color: black;
+    padding: 0 0;
+    text-align: center;
+    transition: 0.4s;
+}
+
+.btn:hover {
+    background-color:#8b8046;
+    color: white;
+    border: solid 5px #8b8046;
+}
+
+.btn-wrn:hover{
+    background-color: #b8bb1c;
+    font-size: 20px;
+}
+
+
+footer{
+    display: block;
+    margin-top: 25px;
+    padding: 20px 0;
+    background: rgb(17, 17, 17);
+}
+
+a{
+    color:#d5b16780;
+}
+a:hover{
+    color:#d5b167;
+}
+
+.container-footer{ 
+    font-size: 15px;
+    background-color: rgb(17, 17, 17);
+}
+
+.container-social{
+    font-size: 17px;
+}
+
+.bg-text{
+    background-color: #c9c5b0!important;
+    overflow: auto;
+}
+.bg-text .col-12{
+    font-size: 1.1rem;
+}
+
+.background-filter{
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    z-index: -100000;
+    position: fixed;
+    background: url(../style/img/bg-filter.png);
+}
+
+.background-img-container {
+    left: 0px;
+    top: 0px;
+    overflow: hidden;
+    margin: 0px;
+    padding: 0px;
+    height: 100%;
+    width: 100%;
+    z-index: -999999;
+    position: fixed;
+}
+
+.background-img{
+    background-image: url("../style/img/bg-img-animals.jpeg");
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat; 
+    background-size: cover;
+}
+body{
+    background-color: #5a6773; /*Por si falla cargar la imagen de fondo*/
+}
+
+.undr-cstr{
+    max-height: 452px;
+    max-width: 452px;
+    margin: auto;
+}
