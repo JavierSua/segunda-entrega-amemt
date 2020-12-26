@@ -17,7 +17,7 @@
     height: auto;
     max-height: 400px;
     margin: auto; 
-  
+    
 } 
 
 .carousel-caption{
@@ -61,6 +61,14 @@
 .btn-wrn:hover{
     background-color: #b8bb1c;
     font-size: 20px;
+}
+
+.btn-borrar{
+    padding: .75rem;
+    vertical-align: top;
+    width: 49px;
+    height: 48px;
+    
 }
 
 .btnTablaAgregar{
