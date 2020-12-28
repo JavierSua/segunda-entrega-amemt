@@ -65,8 +65,9 @@
 
 .btn-borrar{
     padding: .75rem;
+    margin: 0 7%;
     vertical-align: top;
-    width: 49px;
+    min-width: 49px;
     height: 48px;
     
 }
@@ -80,6 +81,14 @@
     border-radius: 3px;
     margin-left: 10%;
     margin-top: 8px;
+}
+
+.progress-bar{
+    width: 0%;
+    transition: width 2s ease;
+}
+.progress-bar-full{
+    width: 100%;
 }
 
 footer{
