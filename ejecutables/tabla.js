@@ -20,7 +20,7 @@ let createRow = (element) => {
     trEl.classList.add('tr')
     for (let clave in element) {
         let tdEl = document.createElement('td');
-        tdEl.innerHTML = element[clave];
+        tdEl.innerHTML = capitalizeFirstLetter(element[clave]);
         trEl.appendChild(tdEl)
     }
     let btnBorrarEl = document.createElement('BUTTON');
@@ -33,17 +33,21 @@ let createRow = (element) => {
     btnEditEl.innerHTML = 'Editar';
     btnEditEl.classList.add('btn-borrar');
     btnEditEl.addEventListener('click', function(e){
-        let modal =  document.getElementsByClassName('btnTablaAgregar')[0]
-        console.log(modal)
-        modal.click();//con esto abro el modal de agregar. buscar forma para hacer que edite equisdededede
-        Array.from(e.target.parentNode.children).forEach(el => {
-            console.log (el.innerHTML)   
+        let btnmodal =  document.getElementsByClassName('btnTablaAgregar')[0];
+        editing = true
+        modalInputArray.forEach((el) => {
+            el.value = Array.from(e.target.parentNode.children)[modalInputArray.indexOf(el)].innerHTML;
         });
+        rowToEdit =  e.target.parentNode
+        btnmodal.click()
     });
     trEl.appendChild(btnBorrarEl);
     trEl.appendChild(btnEditEl);
     return trEl
 }
+
+let editing = false
+var rowToEdit
 
 let createBody = (elements)=> {
     let tbodyEl = document.createElement('tbody');
@@ -75,22 +79,7 @@ const areInputsFilled = () => {
     });
     return isValid;
 }
-const setRequired=(array,boolean)=>{
-    Array.from(array).forEach(el =>{
-        el.required = boolean
-    })
-}
-
-let progBar = document.getElementsByClassName('progress-bar')[0];
-let btnAgregar = document.getElementById('btnTablaModalAgregar');
-let modalInputArray = Array.from(document.getElementsByClassName('modalInput'));
-
-window.addEventListener('load', () => {
-    createHeader(clavesEspecimenes);
-    createBody(dataParseada.especimenes);
-});
-
-btnAgregar.addEventListener('click', () => {
+const addNewRow = () =>{
     let tbodyEl = document.getElementsByTagName('tbody')[0];
     setRequired(modalInputArray, true);
     if(areInputsFilled()){
@@ -103,12 +92,43 @@ btnAgregar.addEventListener('click', () => {
                 Fruta : modalInputArray[3].value,
                 Hojas : modalInputArray[4].value
             }
-            tbodyEl.appendChild(createRow(NuevoEspecimen));
+            if(editing){
+                rowToEdit.parentNode.replaceChild(createRow(NuevoEspecimen), rowToEdit)
+                editing = false;
+            }else{
+                tbodyEl.appendChild(createRow(NuevoEspecimen));
+            }
             clearArray(modalInputArray);
             $('#exampleModal').modal('hide');
             progBar.classList.toggle('progress-bar-full');
         }, 2000);
         setRequired(modalInputArray, false);
     }
-    
+}
+const setRequired=(array, boolean)=>{
+    Array.from(array).forEach(el =>{
+        el.required = boolean
+    })
+}
+const capitalizeFirstLetter = (s) => {
+    return s.charAt(0).toUpperCase() + s.slice(1);
+  }
+
+let progBar = document.getElementsByClassName('progress-bar')[0];
+let btnAgregar = document.getElementById('btnTablaModalAgregar');
+let btnCancelar = document.getElementsByClassName('btn-secondary')[0];
+let modalInputArray = Array.from(document.getElementsByClassName('modalInput'));
+
+window.addEventListener('load', () => {
+    createHeader(clavesEspecimenes);
+    createBody(dataParseada.especimenes);
+});
+
+btnAgregar.addEventListener('click', () => {
+    addNewRow();
+});
+
+btnCancelar.addEventListener('click', () => {
+    clearArray(modalInputArray);
+    editing = false
 });
