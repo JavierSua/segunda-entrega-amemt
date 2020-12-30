@@ -7,21 +7,44 @@ let createHeader = (claves) => {
     
     claves.forEach(element => {
         let thEl = document.createElement('th');
-        thEl.innerHTML = element;
-        trEl.appendChild(thEl);  
-    });
-    
+        let filterBtn = document.createElement('BUTTON');
+        let filterDrpDwnList = document.createElement('div');
+        thEl.classList.add('dropdown');
+        //
+        filterBtn.classList.add('btn','btn-secondary','dropdown-toggle');
+        filterBtn.innerHTML = element;
+        filterBtn.setAttribute('id', 'dropdownMenuButton');
+        filterBtn.setAttribute('type', 'button');
+        filterBtn.setAttribute('data-toggle', 'dropdown');
+        filterBtn.addEventListener('click',(e) => {
+            let tbody = document.getElementsByTagName('tbody')[0];
+            clearArray(document.getElementsByClassName('filterInput'));
+            tbody.parentElement.replaceChild(createBody(filter(e,element)),tbody);
+        });
+        //
+        filterDrpDwnList.classList.add('dropdown-menu');
+        let filterInput = document.createElement('input');
+        filterInput.classList.add('filterInput');
+        filterInput.addEventListener('input', (e)=>{
+            let tbody = document.getElementsByTagName('tbody')[0];
+            tbody.parentElement.replaceChild(createBody(filter(e,element)),tbody);
+        });
+        filterDrpDwnList.appendChild(filterInput);
+        thEl.appendChild(filterBtn);
+        thEl.appendChild(filterDrpDwnList);
+        trEl.appendChild(thEl);
+    });    
     theadEl.appendChild(trEl);
     tableEl.appendChild(theadEl);
-}
+};
 
 let createRow = (element) => {
     let trEl = document.createElement('tr');
-    trEl.classList.add('tr')
+    trEl.classList.add('tr');
     for (let clave in element) {
         let tdEl = document.createElement('td');
         tdEl.innerHTML = capitalizeFirstLetter(element[clave]);
-        trEl.appendChild(tdEl)
+        trEl.appendChild(tdEl);
     }
     let btnBorrarEl = document.createElement('BUTTON');
     btnBorrarEl.innerHTML = 'X';
@@ -34,40 +57,35 @@ let createRow = (element) => {
     btnEditEl.classList.add('btn-borrar');
     btnEditEl.addEventListener('click', function(e){
         let btnmodal =  document.getElementsByClassName('btnTablaAgregar')[0];
-        editing = true
+        editing = true ;
         modalInputArray.forEach((el) => {
             el.value = Array.from(e.target.parentNode.children)[modalInputArray.indexOf(el)].innerHTML;
         });
-        rowToEdit =  e.target.parentNode
-        btnmodal.click()
+        rowToEdit =  e.target.parentNode;
+        btnmodal.click();
     });
     trEl.appendChild(btnBorrarEl);
     trEl.appendChild(btnEditEl);
     return trEl
 }
 
-let editing = false
-var rowToEdit
-
 let createBody = (elements)=> {
     let tbodyEl = document.createElement('tbody');
     elements.forEach(el => {
         tbodyEl.appendChild(createRow(el));
     });
-    tableEl.appendChild(tbodyEl);
+    return tbodyEl
 };
+
+let appendBody = (body) => {
+    tableEl.appendChild(body);
+}
 
 const clearArray = (array) => {
     Array.from(array).forEach((el) => {
         el.value = "";
     });
 };
-
-const deleteRow = (event) => {
-    console.log($('.btn-borrar'))
-    console.log($('.tr'))
-    console.log(event)
-}
 
 const areInputsFilled = () => {
     var isValid = true;
@@ -98,6 +116,7 @@ const addNewRow = () =>{
             }else{
                 tbodyEl.appendChild(createRow(NuevoEspecimen));
             }
+            dataParseada.especimenes.push(NuevoEspecimen);
             clearArray(modalInputArray);
             $('#exampleModal').modal('hide');
             progBar.classList.toggle('progress-bar-full');
@@ -105,15 +124,26 @@ const addNewRow = () =>{
         setRequired(modalInputArray, false);
     }
 }
-const setRequired=(array, boolean)=>{
+
+const filter =(e, para)=>{
+    let results;
+    results = dataParseada.especimenes.filter(item => 
+        item[para].toLowerCase().includes(e.target.value.toLowerCase())
+        );
+        return results
+}
+
+const setRequired=(array, bool)=>{
     Array.from(array).forEach(el =>{
-        el.required = boolean
+        el.required = bool;
     })
 }
 const capitalizeFirstLetter = (s) => {
     return s.charAt(0).toUpperCase() + s.slice(1);
-  }
+}
 
+let editing = false;
+var rowToEdit;
 let progBar = document.getElementsByClassName('progress-bar')[0];
 let btnAgregar = document.getElementById('btnTablaModalAgregar');
 let btnCancelar = document.getElementsByClassName('btn-secondary')[0];
@@ -121,7 +151,7 @@ let modalInputArray = Array.from(document.getElementsByClassName('modalInput'));
 
 window.addEventListener('load', () => {
     createHeader(clavesEspecimenes);
-    createBody(dataParseada.especimenes);
+    appendBody(createBody(dataParseada.especimenes));
 });
 
 btnAgregar.addEventListener('click', () => {
@@ -130,5 +160,5 @@ btnAgregar.addEventListener('click', () => {
 
 btnCancelar.addEventListener('click', () => {
     clearArray(modalInputArray);
-    editing = false
+    editing = false;
 });

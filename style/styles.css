@@ -45,7 +45,6 @@
 }
 
 .btn, .btn-wrn {
-    display: flex;
     color: black;
     padding: 0 0;
     text-align: center;
