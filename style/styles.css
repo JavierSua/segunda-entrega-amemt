@@ -62,7 +62,7 @@
     font-size: 20px;
 }
 
-.btn-borrar{
+.btn-borrar, .btn-edit{
     padding: .75rem;
     margin: 0 7%;
     vertical-align: top;

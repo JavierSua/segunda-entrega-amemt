@@ -50,15 +50,15 @@ let createRow = (element) => {
     btnBorrarEl.innerHTML = 'X';
     btnBorrarEl.classList.add('btn-borrar');
     btnBorrarEl.addEventListener('click', function(e){
+        dataParseada.especimenes.splice(Array.from(document.getElementsByClassName('btn-borrar')).indexOf(e.target), 1);
         e.target.parentNode.remove();
     });
     let btnEditEl = document.createElement('BUTTON');
     btnEditEl.innerHTML = 'Editar';
-    btnEditEl.classList.add('btn-borrar');
     btnEditEl.classList.add('btn-edit');
     btnEditEl.addEventListener('click', function(e){
-        objToEdit = element
         let btnmodal =  document.getElementsByClassName('btnTablaAgregar')[0];
+        objToEdit = element
         editing = true ;
         modalInputArray.forEach((el) => {
             el.value = Array.from(e.target.parentNode.children)[modalInputArray.indexOf(el)].innerHTML;
