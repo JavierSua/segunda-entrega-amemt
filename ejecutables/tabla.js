@@ -55,7 +55,9 @@ let createRow = (element) => {
     let btnEditEl = document.createElement('BUTTON');
     btnEditEl.innerHTML = 'Editar';
     btnEditEl.classList.add('btn-borrar');
+    btnEditEl.classList.add('btn-edit');
     btnEditEl.addEventListener('click', function(e){
+        objToEdit = element
         let btnmodal =  document.getElementsByClassName('btnTablaAgregar')[0];
         editing = true ;
         modalInputArray.forEach((el) => {
@@ -103,20 +105,28 @@ const addNewRow = () =>{
     if(areInputsFilled()){
         progBar.classList.toggle('progress-bar-full');
         setTimeout(() => {
-            let NuevoEspecimen = {
-                Nombre : modalInputArray[0].value,
-                Clima : modalInputArray[1].value,
-                Flor : modalInputArray[2].value,
-                Fruta : modalInputArray[3].value,
-                Hojas : modalInputArray[4].value
-            }
             if(editing){
-                rowToEdit.parentNode.replaceChild(createRow(NuevoEspecimen), rowToEdit)
+                objInEdit = {
+                    Nombre : modalInputArray[0].value,
+                    Clima : modalInputArray[1].value,
+                    Flor : modalInputArray[2].value,
+                    Fruta : modalInputArray[3].value,
+                    Hojas : modalInputArray[4].value
+                }
+                rowToEdit.parentNode.replaceChild(createRow(objInEdit), rowToEdit)
                 editing = false;
+                dataParseada.especimenes[dataParseada.especimenes.indexOf(objToEdit)] = objInEdit
             }else{
+                let NuevoEspecimen = {
+                    Nombre : modalInputArray[0].value,
+                    Clima : modalInputArray[1].value,
+                    Flor : modalInputArray[2].value,
+                    Fruta : modalInputArray[3].value,
+                    Hojas : modalInputArray[4].value
+                }
                 tbodyEl.appendChild(createRow(NuevoEspecimen));
+                dataParseada.especimenes.push(NuevoEspecimen);
             }
-            dataParseada.especimenes.push(NuevoEspecimen);
             clearArray(modalInputArray);
             $('#exampleModal').modal('hide');
             progBar.classList.toggle('progress-bar-full');
@@ -144,6 +154,8 @@ const capitalizeFirstLetter = (s) => {
 
 let editing = false;
 var rowToEdit;
+var objInEdit;
+var objToEdit;
 let progBar = document.getElementsByClassName('progress-bar')[0];
 let btnAgregar = document.getElementById('btnTablaModalAgregar');
 let btnCancelar = document.getElementsByClassName('btn-secondary')[0];
